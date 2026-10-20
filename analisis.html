@@ -17,16 +17,57 @@
   </header>
   <main class="container">
     <section class="page-heading"><p class="eyebrow">Studi Kasus 06 · Kelompok 6</p><h1>Analisis Masalah</h1><p>SSI1144 Algoritma dan Pengantar Pemrograman</p></section>
-    <section class="card"><h2>Latar Belakang dan Rumusan Masalah</h2><p><!-- ISI SENDIRI --></p></section>
-    <section class="card"><h2>Tujuan dan Pengguna</h2><p><!-- ISI SENDIRI --></p></section>
-    <section class="card"><h2>Ketentuan dan Batasan</h2><p><!-- ISI SENDIRI --></p></section>
+    <section class="card"><h2>Latar Belakang dan Rumusan Masalah</h2><p><p>Koperasi membutuhkan cara yang sistematis untuk memantau persediaan barang. Pencatatan manual rawan salah hitung, terutama saat stok awal, barang masuk, dan barang terjual harus dihitung satu per satu. Akibatnya, koperasi bisa terlambat mengetahui barang yang hampir habis, sehingga pemesanan kembali terlambat dan penjualan terganggu.</p>
+<p>Program evaluasi persediaan ini menghitung stok akhir, menentukan status tiap barang (Habis, Menipis, atau Aman), dan menghitung jumlah serta biaya pemesanan kembali.</p>
+<p><strong>Rumusan masalah:</strong></p>
+<ol>
+  <li>Bagaimana menghitung stok akhir dari stok awal, barang masuk, dan barang terjual?</li>
+  <li>Bagaimana menentukan status barang berdasarkan stok akhir dan stok minimum?</li>
+  <li>Bagaimana menghitung jumlah dan biaya pemesanan kembali untuk barang yang habis atau menipis?</li>
+  <li>Bagaimana mencegah data yang tidak masuk akal, seperti nilai negatif atau penjualan melebihi stok?</li>
+  <li>Bagaimana merekap hasil evaluasi banyak barang tanpa menggunakan array?</li>
+</ol>
+    <section class="card"><h2>Tujuan dan Pengguna</h2><p><p><strong>Tujuan:</strong> membuat program C++ berbasis console yang mengevaluasi persediaan beberapa barang dan menampilkan rincian serta rekapitulasinya.</p>
+<p><strong>Pengguna:</strong> petugas koperasi yang mencatat stok barang, dan pengurus koperasi yang membaca rekapitulasi persediaan untuk menentukan pemesanan kembali.</p>
+    <section class="card"><h2>Ketentuan dan Batasan</h2><p><ul>
+  <li>Stok akhir = stok awal + barang masuk - barang terjual.</li>
+  <li>Penjualan tidak boleh melebihi stok yang tersedia (stok awal + barang masuk).</li>
+  <li>Stok akhir 0 berstatus Habis; di bawah stok minimum berstatus Menipis; sama dengan atau di atas stok minimum berstatus Aman.</li>
+  <li>Barang Habis atau Menipis dipesan sampai stok mencapai dua kali stok minimum.</li>
+  <li>Program berjalan di console dengan bahasa C++, memakai variabel, operator, percabangan, dan perulangan.</li>
+  <li>Program tidak menggunakan array, class, database, GUI, atau library eksternal.</li>
+  <li>Program menolak input negatif dan input yang bukan angka, lalu meminta input ulang.</li>
+  <li>Program menyediakan pilihan untuk mengulang atau mengakhiri proses.</li>
+</ul>
     <section class="card">
       <h2>Tabel Input-Process-Output</h2>
-      <div class="table-wrap"><table><thead><tr><th>Input</th><th>Process</th><th>Output</th></tr></thead><tbody><tr><td><!-- ISI SENDIRI --></td><td><!-- ISI SENDIRI --></td><td><!-- ISI SENDIRI --></td></tr></tbody></table></div>
+      <div class="table-wrap"><table><thead><tr><th>Input</th><th>Process</th><th>Output</th></tr></thead><tbody><tr><td><table>
+  <tr><th>Input</th><th>Proses</th><th>Output</th></tr>
+  <tr>
+    <td>Kode barang<br>Nama barang<br>Stok awal<br>Barang masuk<br>Barang terjual<br>Stok minimum<br>Harga beli<br>Pilihan lanjut (y/n)</td>
+    <td>Validasi input<br>Hitung stok tersedia dan stok akhir<br>Tentukan status barang<br>Hitung jumlah pesan<br>Hitung biaya pemesanan<br>Ulangi untuk barang berikutnya<br>Rekap seluruh barang</td>
+    <td>Rincian tiap barang (stok akhir, status, jumlah pesan, biaya)<br>Jumlah barang Aman, Menipis, dan Habis<br>Total unit terjual<br>Total unit yang harus dipesan<br>Total biaya pemesanan<br>Barang dengan penjualan tertinggi</td>
+  </tr>
+</table>
     </section>
     <section class="card">
       <h2>Variabel dan Tipe Data</h2>
-      <div class="table-wrap"><table><thead><tr><th>Nama variabel</th><th>Tipe data</th><th>Nilai awal</th><th>Kegunaan</th></tr></thead><tbody><tr><td><!-- ISI SENDIRI --></td><td><!-- ISI SENDIRI --></td><td><!-- ISI SENDIRI --></td><td><!-- ISI SENDIRI --></td></tr></tbody></table></div>
+      <div class="table-wrap"><table><thead><tr><th>Nama variabel</th><th>Tipe data</th><th>Nilai awal</th><th>Kegunaan</th></tr></thead><tbody><tr><td><table>
+  <tr><th>Variabel</th><th>Tipe data</th><th>Nilai awal</th><th>Kegunaan</th></tr>
+  <tr><td>kodeBarang</td><td>string</td><td>-</td><td>Menyimpan kode barang</td></tr>
+  <tr><td>namaBarang</td><td>string</td><td>-</td><td>Menyimpan nama barang</td></tr>
+  <tr><td>stokAwal</td><td>int</td><td>0</td><td>Jumlah stok di awal periode</td></tr>
+  <tr><td>barangMasuk</td><td>int</td><td>0</td><td>Jumlah barang yang masuk</td></tr>
+  <tr><td>barangTerjual</td><td>int</td><td>0</td><td>Jumlah barang yang terjual</td></tr>
+  <tr><td>stokMinimum</td><td>int</td><td>0</td><td>Batas minimum stok aman</td></tr>
+  <tr><td>hargaBeli</td><td>int</td><td>0</td><td>Harga beli per unit</td></tr>
+  <tr><td>stokTersedia</td><td>int</td><td>0</td><td>stokAwal + barangMasuk, batas maksimum penjualan</td></tr>
+  <tr><td>stokAkhir</td><td>int</td><td>0</td><td>Hasil perhitungan stok akhir</td></tr>
+  <tr><td>statusBarang</td><td>string</td><td>""</td><td>Habis / Menipis / Aman</td></tr>
+  <tr><td>jumlahPesan</td><td>int</td><td>0</td><td>Unit yang harus dipesan kembali</td></tr>
+  <tr><td>biayaPesan</td><td>int</td><td>0</td><td>jumlahPesan x hargaBeli</td></tr>
+  <tr><td>lanjut</td><td>char</td><td>'y'</td><td>Pilihan mengulang atau mengakhiri</td></tr>
+</table>
     </section>
   </main>
   <footer class="site-footer"><div class="container">Kelompok 6 <span aria-hidden="true">·</span> Sistem Informasi</div></footer>
