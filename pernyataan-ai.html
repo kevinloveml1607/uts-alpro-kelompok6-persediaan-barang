@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pernyataan AI | Kelompok 6</title>
+  <title>Pernyataan Penggunaan AI | Kelompok 6</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,10 +16,55 @@
     </div>
   </header>
   <main class="container">
-    <section class="page-heading"><p class="eyebrow">Kelompok 6</p><h1>Pernyataan AI</h1></section>
-    <section class="card">
-      <h2>Penggunaan Alat AI</h2>
-      <div class="table-wrap"><table><thead><tr><th>Nama alat AI</th><th>Tujuan</th><th>Prompt utama</th><th>Bagian hasil yang digunakan</th><th>Perubahan yang saya lakukan</th><th>Hasil verifikasi</th></tr></thead><tbody><tr><td><!-- ISI SENDIRI --></td><td><!-- ISI SENDIRI --></td><td><!-- ISI SENDIRI --></td><td><!-- ISI SENDIRI --></td><td><!-- ISI SENDIRI --></td><td><!-- ISI SENDIRI --></td></tr></tbody></table></div>
+    <section class="page-heading"><p class="eyebrow">Studi Kasus 06 · Kelompok 6</p><h1>Pernyataan Penggunaan AI</h1><p>Anggota: Kevin Sebastian Liem (NIM 322610006), Modul A</p></section>
+
+    <section class="card"><h2>1. Claude (Anthropic)</h2>
+      <div class="table-wrap"><table>
+        <tbody>
+          <tr><th>Nama alat</th><td>Claude (Anthropic)</td></tr>
+          <tr><th>Tujuan</th><td>Menuntun pembuatan repository dan struktur folder GitHub Pages, menuntun pengerjaan Modul A di VS Code, serta membantu memperbaiki flowchart, algoritma deskriptif, pseudocode, dan kode C++ Modul A.</td></tr>
+          <tr><th>Prompt utama</th><td>
+            <p>Prompt awal: "baca seluruh dokumen ini, saya dan teman saya lucy ingin mengerjakan projek ini studi kasus 6, saya modul a dan lucy modul b, bantu dan tuntun saya mulai bikin repository dan mulai kerja di vs code, kami menggunakan bahasa c++, dan bantu aku untuk membuat repo nya sesuai struktur dari uts yg di inginkan"</p>
+            <p>Prompt lanjutan: "bikin flowchart nya yang betul terkadang masih berantakan" dan "perbaikin semua kode nya dl".</p>
+          </td></tr>
+          <tr><th>Bagian hasil yang digunakan</th><td>Draf analisis masalah dan tabel variabel, algoritma deskriptif, pseudocode, kode <code>modul_a.cpp</code>, gambar flowchart Modul A hasil perbaikan, kerangka isi halaman <code>modul-a.html</code>, dan daftar skenario pengujian.</td></tr>
+          <tr><th>Perubahan yang dilakukan mahasiswa</th><td>
+            <ul>
+              <li>Menggambar flowchart awal sendiri di draw.io, lalu memperbaikinya setelah dikoreksi (arah panah ke Selesai, label Ya/Tidak, kepala panah, dan teks).</li>
+              <li>Memasukkan seluruh konten ke halaman kerangka dari Copilot, serta memperbaiki bagian yang tertempel ganda.</li>
+              <li>Memperbaiki file <code>modul_a.cpp</code> yang rusak karena salah tempel dan mode timpa (OVR) di VS Code.</li>
+              <li>Menyesuaikan nama file gambar agar sama dengan yang dipakai di HTML.</li>
+            </ul>
+          </td></tr>
+          <tr><th>Hasil verifikasi mahasiswa</th><td>
+            <ul>
+              <li>Kode dikompilasi dengan g++ dan dijalankan di VS Code tanpa error.</li>
+              <li>Program diuji dengan data nyata, misalnya stok awal 10, barang masuk 5, terjual 12, stok minimum 5, harga beli 2000, menghasilkan stok akhir 3, status Menipis, pesan 7 unit, biaya Rp14000, sesuai hitungan manual.</li>
+              <li>Input negatif, huruf, dan penjualan melebihi stok ditolak dan program tetap berjalan.</li>
+              <li>Sepuluh skenario pada tabel pengujian pertama kali dijalankan melalui Claude dengan kode yang sama, kemudian saya jalankan ulang sebagian skenario di komputer sendiri untuk memastikan hasilnya sama.</li>
+              <li>Tampilan halaman dicek lewat Live Server dan GitHub Pages.</li>
+            </ul>
+          </td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="card"><h2>2. GitHub Copilot (VS Code)</h2>
+      <div class="table-wrap"><table>
+        <tbody>
+          <tr><th>Nama alat</th><td>GitHub Copilot (VS Code)</td></tr>
+          <tr><th>Tujuan</th><td>Membuat kerangka dan tampilan halaman GitHub Pages (HTML dan CSS).</td></tr>
+          <tr><th>Prompt utama</th><td>"Repo ini untuk GitHub Pages (HTML + CSS statis, tanpa framework, bahasa Indonesia). Tugasmu HANYA membuat kerangka dan tampilan. JANGAN mengarang isi akademik atau refleksi. [...]"</td></tr>
+          <tr><th>Bagian hasil yang digunakan</th><td>Struktur tujuh halaman HTML, menu navigasi, dan <code>style.css</code>.</td></tr>
+          <tr><th>Perubahan yang dilakukan mahasiswa</th><td>Seluruh isi akademik (analisis, algoritma, pseudocode, flowchart, source code, pengujian) ditulis dan dimasukkan sendiri; penanda <code>ISI SENDIRI</code> diganti dengan isi yang sesuai, dan bagian ganda diperbaiki.</td></tr>
+          <tr><th>Hasil verifikasi mahasiswa</th><td>Semua halaman, menu, gambar, dan tabel dicek lewat Live Server dan GitHub Pages dan tampil dengan benar.</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="card"><h2>3. Pernyataan</h2>
+      <p>Semua bagian yang memakai bantuan AI telah saya baca, uji, dan pahami, sehingga dapat saya jelaskan dan modifikasi saat presentasi.</p>
+      <!-- Tambahkan di sini penggunaan AI untuk Modul B dan integrasi setelah dikerjakan bersama Lucy. -->
     </section>
   </main>
   <footer class="site-footer"><div class="container">Kelompok 6 <span aria-hidden="true">·</span> Sistem Informasi</div></footer>
