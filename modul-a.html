@@ -17,27 +17,29 @@
   </header>
   <main class="container">
     <section class="page-heading"><p class="eyebrow">Studi Kasus 06 · Kelompok 6</p><h1>Modul A</h1><p>Penanggung jawab: Kevin Sebastian Liem (NIM 322610006)</p></section>
-    <section class="card"><h2>Algoritma Deskriptif</h2><p><section class="card"><h2>Algoritma Deskriptif</h2>
-  <ol>
-    <li>Mulai.</li>
-    <li>Siapkan variabel lanjut dengan nilai 'y'.</li>
-    <li>Selama lanjut bernilai 'y' atau 'Y', lakukan langkah 4 sampai 15.</li>
-    <li>Baca kodeBarang dan namaBarang.</li>
-    <li>Baca stokAwal. Jika negatif atau bukan angka, tampilkan pesan kesalahan dan ulangi pembacaan.</li>
-    <li>Baca barangMasuk. Jika negatif atau bukan angka, tampilkan pesan kesalahan dan ulangi pembacaan.</li>
-    <li>Hitung stokTersedia = stokAwal + barangMasuk.</li>
-    <li>Baca barangTerjual. Jika negatif, bukan angka, atau lebih besar dari stokTersedia, tampilkan pesan kesalahan dan ulangi pembacaan.</li>
-    <li>Baca stokMinimum dan hargaBeli. Jika salah satunya negatif atau bukan angka, tampilkan pesan kesalahan dan ulangi pembacaan.</li>
-    <li>Hitung stokAkhir = stokTersedia - barangTerjual.</li>
-    <li>Jika stokAkhir sama dengan 0, statusBarang = "Habis". Jika tidak, jika stokAkhir kurang dari stokMinimum, statusBarang = "Menipis". Jika tidak, statusBarang = "Aman".</li>
-    <li>Jika statusBarang "Habis" atau "Menipis", jumlahPesan = (2 x stokMinimum) - stokAkhir. Jika tidak, jumlahPesan = 0.</li>
-    <li>Hitung biayaPesan = jumlahPesan x hargaBeli.</li>
-    <li>Tampilkan rincian: stok awal, barang masuk, barang terjual, stok akhir, stok minimum, status, jumlah pesan, dan biaya pemesanan.</li>
-    <li>Tanya apakah ingin memproses barang lain (y/n) dan simpan jawabannya ke lanjut.</li>
-    <li>Setelah perulangan selesai, tampilkan "Program selesai" dan berhenti.</li>
-  </ol>
-</section>
-    <section class="card"><h2>Pseudocode</h2><pre><code><section class="card"><h2>Pseudocode</h2><pre><code>ALGORITMA ModulA_EvaluasiPersediaan
+
+    <section class="card"><h2>Algoritma Deskriptif</h2>
+      <ol>
+        <li>Mulai.</li>
+        <li>Siapkan variabel lanjut dengan nilai 'y'.</li>
+        <li>Selama lanjut bernilai 'y' atau 'Y', lakukan langkah 4 sampai 15.</li>
+        <li>Baca kodeBarang dan namaBarang.</li>
+        <li>Baca stokAwal. Jika negatif atau bukan angka, tampilkan pesan kesalahan dan ulangi pembacaan.</li>
+        <li>Baca barangMasuk. Jika negatif atau bukan angka, tampilkan pesan kesalahan dan ulangi pembacaan.</li>
+        <li>Hitung stokTersedia = stokAwal + barangMasuk.</li>
+        <li>Baca barangTerjual. Jika negatif, bukan angka, atau lebih besar dari stokTersedia, tampilkan pesan kesalahan dan ulangi pembacaan.</li>
+        <li>Baca stokMinimum dan hargaBeli. Jika salah satunya negatif atau bukan angka, tampilkan pesan kesalahan dan ulangi pembacaan.</li>
+        <li>Hitung stokAkhir = stokTersedia - barangTerjual.</li>
+        <li>Jika stokAkhir sama dengan 0, statusBarang = "Habis". Jika tidak, jika stokAkhir kurang dari stokMinimum, statusBarang = "Menipis". Jika tidak, statusBarang = "Aman".</li>
+        <li>Jika statusBarang "Habis" atau "Menipis", jumlahPesan = (2 x stokMinimum) - stokAkhir. Jika tidak, jumlahPesan = 0.</li>
+        <li>Hitung biayaPesan = jumlahPesan x hargaBeli.</li>
+        <li>Tampilkan rincian: stok awal, barang masuk, barang terjual, stok akhir, stok minimum, status, jumlah pesan, dan biaya pemesanan.</li>
+        <li>Tanya apakah ingin memproses barang lain (y/n) dan simpan jawabannya ke lanjut.</li>
+        <li>Setelah perulangan selesai, tampilkan "Program selesai" dan berhenti.</li>
+      </ol>
+    </section>
+
+    <section class="card"><h2>Pseudocode</h2><pre><code>ALGORITMA ModulA_EvaluasiPersediaan
 
 DEKLARASI
   kodeBarang, namaBarang, statusBarang : string
@@ -101,19 +103,21 @@ DESKRIPSI
     INPUT lanjut
   END WHILE
 SELESAI</code></pre></section>
-    <section class="card"><h2>Flowchart</h2><p><section class="card"><h2>Flowchart</h2>
-  <a href="assets/flowchart/flowchart-modul-a.png"><img src="assets/flowchart/flowchart-modul-a.png" alt="Flowchart Modul A"></a>
-  <p>Klik gambar untuk melihat ukuran penuh.</p>
-</section>
-    <section class="card"><h2>Source Code dan Penjelasan</h2><p><section class="card"><h2>Source Code dan Penjelasan</h2>
-  <ul>
-    <li><strong>Perulangan utama (while):</strong> memproses barang satu per satu selama jawaban lanjut adalah 'y' atau 'Y'.</li>
-    <li><strong>Validasi (do-while):</strong> input dibaca minimal sekali dan diulang selama nilainya tidak valid, sesuai REPEAT-UNTIL di pseudocode.</li>
-    <li><strong>cin.clear() dan cin.ignore():</strong> memulihkan cin saat pengguna mengetik huruf, sehingga program tidak berhenti atau berulang tanpa henti.</li>
-    <li><strong>stokTersedia:</strong> batas maksimum penjualan, yaitu stokAwal + barangMasuk.</li>
-    <li><strong>Status barang:</strong> stokAkhir = 0 dicek lebih dulu agar stok nol selalu berstatus Habis, lalu stokAkhir &lt; stokMinimum berstatus Menipis, selain itu Aman.</li>
-    <li><strong>Jumlah pesan:</strong> (2 x stokMinimum) - stokAkhir untuk status Habis atau Menipis, selain itu 0.</li>
-  </ul>
+
+    <section class="card"><h2>Flowchart</h2>
+      <a href="assets/flowchart/flowchart-modul-a.png"><img src="assets/flowchart/flowchart-modul-a.png" alt="Flowchart Modul A"></a>
+      <p>Klik gambar untuk melihat ukuran penuh.</p>
+    </section>
+
+    <section class="card"><h2>Source Code dan Penjelasan</h2>
+      <ul>
+        <li><strong>Perulangan utama (while):</strong> memproses barang satu per satu selama jawaban lanjut adalah 'y' atau 'Y'.</li>
+        <li><strong>Validasi (do-while):</strong> input dibaca minimal sekali dan diulang selama nilainya tidak valid, sesuai REPEAT-UNTIL di pseudocode.</li>
+        <li><strong>cin.clear() dan cin.ignore():</strong> memulihkan cin saat pengguna mengetik huruf, sehingga program tidak berhenti atau berulang tanpa henti.</li>
+        <li><strong>stokTersedia:</strong> batas maksimum penjualan, yaitu stokAwal + barangMasuk.</li>
+        <li><strong>Status barang:</strong> stokAkhir = 0 dicek lebih dulu agar stok nol selalu berstatus Habis, lalu stokAkhir &lt; stokMinimum berstatus Menipis, selain itu Aman.</li>
+        <li><strong>Jumlah pesan:</strong> (2 x stokMinimum) - stokAkhir untuk status Habis atau Menipis, selain itu 0.</li>
+      </ul>
 <pre><code>#include &lt;iostream&gt;
 #include &lt;string&gt;
 using namespace std;
@@ -240,8 +244,30 @@ int main() {
     cout &lt;&lt; "\nProgram selesai." &lt;&lt; endl;
     return 0;
 }</code></pre>
-</section>
-    <section class="card"><h2>Hasil Eksekusi dan Pengujian</h2><p><!-- ISI SENDIRI --></p></section>
+    </section>
+
+    <section class="card"><h2>Hasil Eksekusi dan Pengujian</h2>
+      <h3>Hasil Eksekusi</h3>
+      <a href="assets/screenshot/hasil-menipis.png"><img src="assets/screenshot/hasil-menipis.png" alt="Hasil eksekusi barang berstatus Menipis"></a>
+      <a href="assets/screenshot/hasil-validasi.png"><img src="assets/screenshot/hasil-validasi.png" alt="Hasil eksekusi validasi input"></a>
+
+      <h3>Tabel Pengujian</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>No.</th><th>Skenario</th><th>Data masukan</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Status</th></tr></thead>
+        <tbody>
+      <tr><td>1</td><td>Input normal, status Menipis</td><td>Awal 10, masuk 5, terjual 12, min 5, harga 2000</td><td>Akhir 3, Menipis, pesan 7, Rp14000</td><td>Akhir 3, Menipis, pesan 7 unit, Rp14000</td><td>Berhasil</td></tr>
+      <tr><td>2</td><td>Input normal, status Aman</td><td>Awal 20, masuk 10, terjual 5, min 5, harga 1500</td><td>Akhir 25, Aman, pesan 0, Rp0</td><td>Akhir 25, Aman, pesan 0 unit, Rp0</td><td>Berhasil</td></tr>
+      <tr><td>3</td><td>Batas bawah: stok akhir 0</td><td>Awal 10, masuk 0, terjual 10, min 5, harga 2000</td><td>Akhir 0, Habis, pesan 10, Rp20000</td><td>Akhir 0, Habis, pesan 10 unit, Rp20000</td><td>Berhasil</td></tr>
+      <tr><td>4</td><td>Batas: stok akhir = stok minimum</td><td>Awal 10, masuk 0, terjual 5, min 5, harga 2000</td><td>Akhir 5, Aman, pesan 0, Rp0</td><td>Akhir 5, Aman, pesan 0 unit, Rp0</td><td>Berhasil</td></tr>
+      <tr><td>5</td><td>Batas: satu di bawah stok minimum</td><td>Awal 10, masuk 0, terjual 6, min 5, harga 2000</td><td>Akhir 4, Menipis, pesan 6, Rp12000</td><td>Akhir 4, Menipis, pesan 6 unit, Rp12000</td><td>Berhasil</td></tr>
+      <tr><td>6</td><td>Batas atas: terjual = stok tersedia</td><td>Awal 10, masuk 5, terjual 15, min 5, harga 2000</td><td>Akhir 0, Habis, pesan 10, Rp20000</td><td>Akhir 0, Habis, pesan 10 unit, Rp20000</td><td>Berhasil</td></tr>
+      <tr><td>7</td><td>Nilai nol</td><td>Awal 0, masuk 0, terjual 0, min 5, harga 3000</td><td>Akhir 0, Habis, pesan 10, Rp30000</td><td>Akhir 0, Habis, pesan 10 unit, Rp30000</td><td>Berhasil</td></tr>
+      <tr><td>8</td><td>Penjualan melebihi stok</td><td>Awal 10, masuk 5, terjual 16, lalu 15</td><td>Ditolak, diminta input ulang</td><td>Muncul pesan penjualan tidak valid (0 sampai 15), lalu input 15 diterima</td><td>Berhasil</td></tr>
+      <tr><td>9</td><td>Input negatif</td><td>Stok awal -5, lalu 10</td><td>Ditolak, diminta input ulang</td><td>Muncul pesan harus berupa angka dan tidak boleh negatif, lalu input 10 diterima</td><td>Berhasil</td></tr>
+      <tr><td>10</td><td>Input bukan angka</td><td>Stok awal abc, lalu 10</td><td>Ditolak, program tidak berhenti</td><td>Muncul pesan harus berupa angka dan tidak boleh negatif, program tetap berjalan</td><td>Berhasil</td></tr>
+        </tbody>
+      </table></div>
+    </section>
   </main>
   <footer class="site-footer"><div class="container">Kelompok 6 <span aria-hidden="true">·</span> Sistem Informasi</div></footer>
 </body>
