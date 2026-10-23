@@ -17,10 +17,264 @@
   </header>
   <main class="container">
     <section class="page-heading"><p class="eyebrow">Studi Kasus 06 · Kelompok 6</p><h1>Modul B</h1><p>Penanggung jawab: Lucy (NIM 322610008)</p></section>
-    <section class="card"><h2>Algoritma Deskriptif</h2><p><!-- ISI SENDIRI --></p></section>
-    <section class="card"><h2>Pseudocode</h2><pre><code><!-- ISI SENDIRI --></code></pre></section>
-    <section class="card"><h2>Flowchart</h2><p><!-- ISI SENDIRI --></p></section>
-    <section class="card"><h2>Source Code dan Penjelasan</h2><p><!-- ISI SENDIRI --></p><pre><code><!-- ISI SENDIRI --></code></pre></section>
+    <section class="card"><h2>Algoritma Deskriptif</h2>
+      <ol>
+        <li>Mulai.</li>
+        <li>Siapkan variabel rekap: <code>jumlahAman</code>, <code>jumlahMenipis</code>, <code>jumlahHabis</code>, <code>totalTerjual</code>, <code>totalUnitPesan</code>, dan <code>totalBiayaPesan</code> bernilai 0; <code>penjualanTertinggi</code> bernilai -1; <code>kodeTertinggi</code> dan <code>namaTertinggi</code> dikosongkan; <code>lanjut</code> bernilai 'y'.</li>
+        <li>Selama <code>lanjut</code> bernilai 'y' atau 'Y', ulangi langkah 4 sampai 12.</li>
+        <li>Baca <code>kodeBarang</code> dan <code>namaBarang</code>.</li>
+        <li>Baca <code>barangTerjual</code>. Jika bukan angka atau negatif, tampilkan pesan kesalahan dan baca ulang sampai valid.</li>
+        <li>Baca <code>statusPilihan</code> (1 = Aman, 2 = Menipis, 3 = Habis). Jika di luar rentang 1 sampai 3, tampilkan pesan kesalahan dan baca ulang sampai valid.</li>
+        <li>Baca <code>jumlahPesan</code>. Jika bukan angka atau negatif, tampilkan pesan kesalahan dan baca ulang sampai valid.</li>
+        <li>Baca <code>biayaPesan</code>. Jika bukan angka atau negatif, tampilkan pesan kesalahan dan baca ulang sampai valid.</li>
+        <li>Jika <code>statusPilihan</code> = 1, tambah <code>jumlahAman</code> 1; jika = 2, tambah <code>jumlahMenipis</code> 1; selain itu tambah <code>jumlahHabis</code> 1.</li>
+        <li>Tambahkan <code>barangTerjual</code> ke <code>totalTerjual</code>, <code>jumlahPesan</code> ke <code>totalUnitPesan</code>, dan <code>biayaPesan</code> ke <code>totalBiayaPesan</code>.</li>
+        <li>Jika <code>barangTerjual</code> <code>penjualanTertinggi</code>, perbarui <code>penjualanTertinggi</code>, <code>kodeTertinggi</code>, dan <code>namaTertinggi</code> dengan data barang saat ini.</li>
+        <li>Tanyakan "Proses barang lain? (y/n)" dan baca <code>lanjut</code>; tolak jawaban selain y, Y, n, N.</li>
+        <li>Kembali ke langkah 3.</li>
+        <li>Setelah perulangan berhenti, tampilkan rekapitulasi: jumlah barang aman, menipis, habis, total unit terjual, total unit dipesan, total biaya pemesanan, dan barang dengan penjualan tertinggi.</li>
+        <li>Selesai.</li>
+      </ol>
+    </section>
+
+    <section class="card"><h2>Pseudocode</h2><pre><code>ALGORITMA ModulB_RekapitulasiPersediaan
+
+DEKLARASI
+    jumlahAman, jumlahMenipis, jumlahHabis : integer
+    totalTerjual, totalUnitPesan           : integer
+    totalBiayaPesan                        : integer
+    penjualanTertinggi                     : integer
+    kodeTertinggi, namaTertinggi           : string
+    kodeBarang, namaBarang                 : string
+    barangTerjual, statusPilihan           : integer
+    jumlahPesan, biayaPesan                : integer
+    lanjut                                 : character
+
+MULAI
+    // Langkah 2: inisialisasi
+    jumlahAman         ← 0
+    jumlahMenipis      ← 0
+    jumlahHabis        ← 0
+    totalTerjual       ← 0
+    totalUnitPesan     ← 0
+    totalBiayaPesan    ← 0
+    penjualanTertinggi ← -1
+    kodeTertinggi      ← ""
+    namaTertinggi      ← ""
+    lanjut             ← 'y'
+
+    // Langkah 3: perulangan utama
+    SELAMA lanjut = 'y' ATAU lanjut = 'Y' LAKUKAN
+
+        // Langkah 4
+        BACA kodeBarang, namaBarang
+
+        // Langkah 5: validasi barangTerjual
+        BACA barangTerjual
+        SELAMA barangTerjual bukan angka ATAU barangTerjual &lt; 0 LAKUKAN
+            TAMPILKAN "Harus berupa angka dan tidak boleh negatif"
+            BACA barangTerjual
+        AKHIR SELAMA
+
+        // Langkah 6: validasi statusPilihan
+        BACA statusPilihan
+        SELAMA statusPilihan bukan angka ATAU statusPilihan &lt; 1 ATAU statusPilihan &gt; 3 LAKUKAN
+            TAMPILKAN "Pilih 1, 2, atau 3"
+            BACA statusPilihan
+        AKHIR SELAMA
+
+        // Langkah 7: validasi jumlahPesan
+        BACA jumlahPesan
+        SELAMA jumlahPesan bukan angka ATAU jumlahPesan &lt; 0 LAKUKAN
+            TAMPILKAN "Harus berupa angka dan tidak boleh negatif"
+            BACA jumlahPesan
+        AKHIR SELAMA
+
+        // Langkah 8: validasi biayaPesan
+        BACA biayaPesan
+        SELAMA biayaPesan bukan angka ATAU biayaPesan  0 LAKUKAN
+            TAMPILKAN "Harus berupa angka dan tidak boleh negatif"
+            BACA biayaPesan
+        AKHIR SELAMA
+
+        // Langkah 9: hitung jumlah per status
+        JIKA statusPilihan = 1 MAKA
+            jumlahAman ← jumlahAman + 1
+        JIKA TIDAK, JIKA statusPilihan = 2 MAKA
+            jumlahMenipis ← jumlahMenipis + 1
+        JIKA TIDAK
+            jumlahHabis ← jumlahHabis + 1
+        AKHIR JIKA
+
+        // Langkah 10: akumulasi total
+        totalTerjual    ← totalTerjual + barangTerjual
+        totalUnitPesan  ← totalUnitPesan + jumlahPesan
+        totalBiayaPesan ← totalBiayaPesan + biayaPesan
+
+        // Langkah 11: cari penjualan tertinggi
+        JIKA barangTerjual > penjualanTertinggi MAKA
+            penjualanTertinggi ← barangTerjual
+            kodeTertinggi      ← kodeBarang
+            namaTertinggi      ← namaBarang
+        AKHIR JIKA
+
+        // Langkah 12: tanya lanjut, tolak selain y/Y/n/N
+        ULANGI
+            TAMPILKAN "Proses barang lain? (y/n)"
+            BACA lanjut
+            JIKA lanjut bukan 'y', 'Y', 'n', atau 'N' MAKA
+                TAMPILKAN "Jawab y atau n"
+            AKHIR JIKA
+        SAMPAI lanjut = 'y' ATAU 'Y' ATAU 'n' ATAU 'N'
+
+    // Langkah 13: kembali ke SELAMA di atas
+    AKHIR SELAMA
+
+    // Langkah 14: tampilkan rekapitulasi
+    TAMPILKAN "=== REKAPITULASI PERSEDIAAN ==="
+    TAMPILKAN "Barang Aman         : ", jumlahAman
+    TAMPILKAN "Barang Menipis      : ", jumlahMenipis
+    TAMPILKAN "Barang Habis        : ", jumlahHabis
+    TAMPILKAN "Total unit terjual  : ", totalTerjual
+    TAMPILKAN "Total unit dipesan  : ", totalUnitPesan
+    TAMPILKAN "Total biaya pesan   : Rp", totalBiayaPesan
+    TAMPILKAN "Penjualan tertinggi : ", kodeTertinggi, " / ", namaTertinggi,
+              " (", penjualanTertinggi, " unit)"
+SELESAI</code></pre></section>
+
+    <section class="card"><h2>Flowchart</h2>
+      <a href="assets/flowchart/flowchart-modul-b.png"><img src="assets/flowchart/flowchart-modul-b.png" alt="Flowchart Modul B"></a>
+      <p>Klik gambar untuk melihat ukuran penuh.</p>
+    </section>
+
+    <section class="card"><h2>Source Code dan Penjelasan</h2>
+      <ul>
+        <li><strong>Variabel rekap</strong> dideklarasikan dan diisi nilai awal sebelum perulangan. <code>penjualanTertinggi</code> diisi -1 agar barang pertama, termasuk yang terjual 0, pasti menjadi rekor awal.</li>
+        <li><strong>Perulangan utama</strong> <code>while</code> berjalan selama <code>lanjut</code> bernilai 'y' atau 'Y', sehingga banyak barang dapat diproses.</li>
+        <li><strong>Validasi input</strong> memakai <code>while</code> bersarang. <code>cin.fail()</code> menangkap input bukan angka (misalnya "ABC"), <code>cin.clear()</code> dan <code>cin.ignore()</code> membersihkan input yang salah, sehingga program tidak berhenti tidak wajar.</li>
+        <li><strong>Percabangan status</strong> memakai <code>if - else if - else</code> untuk menambah <code>jumlahAman</code>, <code>jumlahMenipis</code>, atau <code>jumlahHabis</code>.</li>
+        <li><strong>Akumulasi</strong> memakai operator <code>+=</code> untuk total terjual, total unit pesan, dan total biaya pesan.</li>
+        <li><strong>Penjualan tertinggi</strong> dicari dengan membandingkan <code>barangTerjual</code> dengan rekor sementara; jika lebih besar, rekor dan identitas barangnya diperbarui.</li>
+        <li><strong>Pertanyaan lanjut</strong> memakai <code>do - while</code> yang menolak jawaban selain y, Y, n, dan N.</li>
+        <li><strong>Rekapitulasi</strong> ditampilkan setelah perulangan utama berhenti.</li>
+      </ul>
+ <pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;limits&gt;
+using namespace std;
+
+int main() {
+    // Variabel rekapitulasi (nilai awal sebelum loop)
+    int jumlahAman = 0, jumlahMenipis = 0, jumlahHabis = 0;
+    int totalTerjual = 0, totalUnitPesan = 0;
+    long long totalBiayaPesan = 0;
+    int penjualanTertinggi = -1;   // -1 supaya barang pertama pasti jadi rekor awal
+    string kodeTertinggi = "", namaTertinggi = "";
+
+    // Variabel input per barang
+    string kodeBarang, namaBarang;
+    int barangTerjual, statusPilihan, jumlahPesan;
+    long long biayaPesan;
+    char lanjut = 'y';
+
+    cout &lt;&lt; "=== REKAPITULASI PERSEDIAAN (MODUL B) ===\n";
+
+    while (lanjut == 'y' || lanjut == 'Y') {
+        cout &lt;&lt; "\n--- Hasil Evaluasi Barang ---\n";
+        cout &lt;&lt; "Kode barang : ";
+        cin &gt;&gt; kodeBarang;
+        cout &lt;&lt; "Nama barang : ";
+        cin &gt;&gt; namaBarang;
+
+        // Validasi barang terjual
+        cout &lt;&lt; "Barang terjual : ";
+        cin &gt;&gt; barangTerjual;
+        while (cin.fail() || barangTerjual &lt; 0) {
+            cin.clear();
+            cin.ignore(numeric_limits&lt;streamsize&gt;::max(), '\n');
+            cout &lt;&lt; " [!] Harus berupa angka dan tidak boleh negatif.\n";
+            cout &lt;&lt; "Barang terjual : ";
+            cin &gt;&gt; barangTerjual;
+        }
+
+        // Validasi status (1-3)
+        cout &lt;&lt; "Status (1=Aman, 2=Menipis, 3=Habis): ";
+        cin &gt;&gt; statusPilihan;
+        while (cin.fail() || statusPilihan &lt; 1 || statusPilihan &gt; 3) {
+            cin.clear();
+            cin.ignore(numeric_limits&lt;streamsize&gt;::max(), '\n');
+            cout &lt;&lt; " [!] Pilih 1, 2, atau 3.\n";
+            cout &lt;&lt; "Status (1=Aman, 2=Menipis, 3=Habis): ";
+            cin &gt;&gt; statusPilihan;
+        }
+
+        // Validasi jumlah pesan
+        cout &lt;&lt; "Jumlah dipesan : ";
+        cin &gt;&gt; jumlahPesan;
+        while (cin.fail() || jumlahPesan &lt; 0) {
+            cin.clear();
+            cin.ignore(numeric_limits&lt;streamsize&gt;::max(), '\n');
+            cout &lt;&lt; " [!] Harus berupa angka dan tidak boleh negatif.\n";
+            cout &lt;&lt; "Jumlah dipesan : ";
+            cin &gt;&gt; jumlahPesan;
+        }
+
+        // Validasi biaya pesan
+        cout &lt;&lt; "Biaya pemesanan : Rp";
+        cin &gt;&gt; biayaPesan;
+        while (cin.fail() || biayaPesan &lt; 0) {
+            cin.clear();
+            cin.ignore(numeric_limits&lt;streamsize&gt;::max(), '\n');
+            cout &lt;&lt; " [!] Harus berupa angka dan tidak boleh negatif.\n";
+            cout &lt;&lt; "Biaya pemesanan : Rp";
+            cin &gt;&gt; biayaPesan;
+        }
+
+        // --- Akumulasi rekapitulasi ---
+        if (statusPilihan == 1) {
+            jumlahAman++;
+        } else if (statusPilihan == 2) {
+            jumlahMenipis++;
+        } else {
+            jumlahHabis++;
+        }
+
+        totalTerjual    += barangTerjual;
+        totalUnitPesan  += jumlahPesan;
+        totalBiayaPesan += biayaPesan;
+
+        if (barangTerjual &gt; penjualanTertinggi) {
+            penjualanTertinggi = barangTerjual;
+            kodeTertinggi = kodeBarang;
+            namaTertinggi = namaBarang;
+        }
+
+        // Tanya lanjut, tolak selain y/n
+        do {
+            cout &lt;&lt; "\nProses barang lain? (y/n): ";
+            cin &gt;&gt; lanjut;
+            if (lanjut != 'y' &amp;&amp; lanjut != 'Y' &amp;&amp; lanjut != 'n' &amp;&amp; lanjut != 'N') {
+                cout &lt;&lt; " [!] Jawab y atau n.\n";
+            }
+        } while (lanjut != 'y' &amp;&amp; lanjut != 'Y' &amp;&amp; lanjut != 'n' &amp;&amp; lanjut != 'N');
+    }
+
+    // --- Tampilkan rekapitulasi ---
+    cout &lt;&lt; "\n=== REKAPITULASI PERSEDIAAN ===\n";
+    cout &lt;&lt; "Barang Aman         : " &lt;&lt; jumlahAman &lt;&lt; endl;
+    cout &lt;&lt; "Barang Menipis      : " &lt;&lt; jumlahMenipis &lt;&lt; endl;
+    cout &lt;&lt; "Barang Habis        : " &lt;&lt; jumlahHabis &lt;&lt; endl;
+    cout &lt;&lt; "Total unit terjual  : " &lt;&lt; totalTerjual &lt;&lt; endl;
+    cout &lt;&lt; "Total unit dipesan  : " &lt;&lt; totalUnitPesan &lt;&lt; " unit" &lt;&lt; endl;
+    cout &lt;&lt; "Total biaya pesan   : Rp" &lt;&lt; totalBiayaPesan &lt;&lt; endl;
+    cout &lt;&lt; "Penjualan tertinggi : " &lt;&lt; kodeTertinggi &lt;&lt; " / " &lt;&lt; namaTertinggi
+         &lt;&lt; " (" &lt;&lt; penjualanTertinggi &lt;&lt; " unit)" &lt;&lt; endl;
+
+    cout &lt;&lt; "\nProgram selesai.\n";
+    return 0;
+}</code></pre>
+</section>
+      
     <section class="card"><h2>Hasil Eksekusi dan Pengujian</h2><p><!-- ISI SENDIRI --></p></section>
   </main>
   <footer class="site-footer"><div class="container">Kelompok 6 <span aria-hidden="true">·</span> Sistem Informasi</div></footer>
