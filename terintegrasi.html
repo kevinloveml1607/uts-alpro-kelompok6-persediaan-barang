@@ -17,17 +17,377 @@
   </header>
   <main class="container">
     <section class="page-heading"><p class="eyebrow">Studi Kasus 06 · Kelompok 6</p><h1>Program Terintegrasi</h1><p>Bahasa pemrograman: C++</p></section>
-    <section class="card"><h2>Proses Integrasi</h2><p><!-- ISI SENDIRI --></p></section>
-    <section class="card"><h2>Pseudocode Final</h2><pre><code><!-- ISI SENDIRI --></code></pre></section>
-    <section class="card"><h2>Flowchart Final</h2><p><!-- ISI SENDIRI --></p></section>
-    <section class="card"><h2>Source Code Final</h2><pre><code><!-- ISI SENDIRI --></code></pre></section>
-    <section class="card"><h2>Hasil Eksekusi</h2><p><!-- ISI SENDIRI --></p></section>
+
+    <section class="card"><h2>Proses Integrasi</h2>
+      <p>Program terintegrasi (<code>src/program_final.cpp</code>) dibuat dengan menjadikan Modul A (<code>modul_a.cpp</code>) sebagai kerangka, lalu menyisipkan bagian rekapitulasi dari Modul B (<code>modul_b.cpp</code>) di tiga tempat dalam satu perulangan yang sama.</p>
+      <ol>
+        <li><strong>Variabel rekapitulasi Modul B</strong> (jumlahAman, jumlahMenipis, jumlahHabis, totalTerjual, totalPesan, totalBiayaPemesanan, penjualanTertinggi, barangTerlaris) dideklarasikan <strong>di luar perulangan</strong> dan diisi nilai awal, supaya nilainya bertahan sampai semua barang diproses. Karena program tidak memakai array, rekapitulasi disimpan pada variabel penampung ini.</li>
+        <li><strong>Pembaruan rekapitulasi</strong> dilakukan <strong>di dalam perulangan</strong>, tepat setelah Modul A selesai menghitung <code>biayaPesan</code>. Modul B memakai hasil Modul A (<code>statusBarang</code>, <code>barangTerjual</code>, <code>jumlahPesan</code>, <code>biayaPesan</code>, <code>namaBarang</code>).</li>
+        <li><strong>Tampilan rekapitulasi</strong> diletakkan <strong>setelah perulangan selesai</strong>, sebelum pesan "Program selesai".</li>
+      </ol>
+      <p><strong>Penyesuaian pada Modul B:</strong></p>
+      <ul>
+        <li>Input manual status barang, barang terjual, jumlah pesan, dan biaya pemesanan dihapus, karena nilai-nilai itu sudah dihitung oleh Modul A. Tanpa penyesuaian ini, petugas harus mengetik hasil perhitungan dua kali.</li>
+        <li>Validasi pilihan lanjut dari Modul B (hanya menerima y atau n) dipakai menggantikan pertanyaan lanjut milik Modul A.</li>
+        <li>Nama variabel kedua modul sudah sama (<code>namaBarang</code>, <code>statusBarang</code>, <code>barangTerjual</code>, <code>jumlahPesan</code>, <code>biayaPesan</code>), sehingga tidak perlu diganti.</li>
+      </ul>
+      <!-- ISI SENDIRI: tulis siapa yang mengerjakan integrasi dan bagaimana kalian memeriksanya bersama. -->
+    </section>
+
+    <section class="card"><h2>Pseudocode Final</h2><pre><code>ALGORITMA ProgramTerintegrasi_EvaluasiPersediaan
+
+DEKLARASI
+  kodeBarang, namaBarang, statusBarang, barangTerlaris : string
+  stokAwal, barangMasuk, barangTerjual, stokMinimum    : integer
+  hargaBeli, stokTersedia, stokAkhir                   : integer
+  jumlahPesan, biayaPesan                              : integer
+  jumlahAman, jumlahMenipis, jumlahHabis               : integer
+  totalTerjual, totalPesan, penjualanTertinggi         : integer
+  totalBiayaPemesanan                                  : long integer
+  lanjut : char
+
+DESKRIPSI
+  lanjut &larr; 'y'
+  jumlahAman &larr; 0 ; jumlahMenipis &larr; 0 ; jumlahHabis &larr; 0
+  totalTerjual &larr; 0 ; totalPesan &larr; 0 ; totalBiayaPemesanan &larr; 0
+  penjualanTertinggi &larr; -1 ; barangTerlaris &larr; ""
+
+  WHILE lanjut = 'y' OR lanjut = 'Y' DO
+    // ----- MODUL A: input dan validasi -----
+    INPUT kodeBarang, namaBarang
+
+    REPEAT
+      INPUT stokAwal
+      IF stokAwal &lt; 0 THEN OUTPUT "Stok awal tidak boleh negatif"
+    UNTIL stokAwal &gt;= 0
+
+    REPEAT
+      INPUT barangMasuk
+      IF barangMasuk &lt; 0 THEN OUTPUT "Barang masuk tidak boleh negatif"
+    UNTIL barangMasuk &gt;= 0
+
+    stokTersedia &larr; stokAwal + barangMasuk
+
+    REPEAT
+      INPUT barangTerjual
+      IF barangTerjual &lt; 0 OR barangTerjual &gt; stokTersedia THEN
+        OUTPUT "Penjualan tidak valid"
+      END IF
+    UNTIL barangTerjual &gt;= 0 AND barangTerjual &lt;= stokTersedia
+
+    REPEAT
+      INPUT stokMinimum, hargaBeli
+      IF stokMinimum &lt; 0 OR hargaBeli &lt; 0 THEN
+        OUTPUT "Stok minimum dan harga beli tidak boleh negatif"
+      END IF
+    UNTIL stokMinimum &gt;= 0 AND hargaBeli &gt;= 0
+
+    // ----- MODUL A: perhitungan -----
+    stokAkhir &larr; stokTersedia - barangTerjual
+
+    IF stokAkhir = 0 THEN
+      statusBarang &larr; "Habis"
+    ELSE IF stokAkhir &lt; stokMinimum THEN
+      statusBarang &larr; "Menipis"
+    ELSE
+      statusBarang &larr; "Aman"
+    END IF
+
+    IF statusBarang = "Habis" OR statusBarang = "Menipis" THEN
+      jumlahPesan &larr; (2 * stokMinimum) - stokAkhir
+    ELSE
+      jumlahPesan &larr; 0
+    END IF
+
+    biayaPesan &larr; jumlahPesan * hargaBeli
+
+    // ----- MODUL B: perbarui rekapitulasi -----
+    IF statusBarang = "Aman" THEN
+      jumlahAman &larr; jumlahAman + 1
+    ELSE IF statusBarang = "Menipis" THEN
+      jumlahMenipis &larr; jumlahMenipis + 1
+    ELSE
+      jumlahHabis &larr; jumlahHabis + 1
+    END IF
+
+    totalTerjual &larr; totalTerjual + barangTerjual
+    totalPesan &larr; totalPesan + jumlahPesan
+    totalBiayaPemesanan &larr; totalBiayaPemesanan + biayaPesan
+
+    IF barangTerjual &gt; penjualanTertinggi THEN
+      penjualanTertinggi &larr; barangTerjual
+      barangTerlaris &larr; namaBarang
+    END IF
+
+    // ----- MODUL A: tampilkan rincian -----
+    OUTPUT rincian barang, stokAkhir, statusBarang, jumlahPesan, biayaPesan
+
+    // ----- pilihan mengulang (hanya y atau n) -----
+    REPEAT
+      OUTPUT "Proses barang lain? (y/n)"
+      INPUT lanjut
+      IF lanjut BUKAN 'y', 'Y', 'n', atau 'N' THEN
+        OUTPUT "Pilihan hanya y atau n"
+      END IF
+    UNTIL lanjut = 'y' OR 'Y' OR 'n' OR 'N'
+  END WHILE
+
+  // ----- MODUL B: tampilkan rekapitulasi -----
+  OUTPUT jumlahAman, jumlahMenipis, jumlahHabis, totalTerjual, totalPesan,
+         totalBiayaPemesanan, barangTerlaris, penjualanTertinggi
+SELESAI</code></pre></section>
+
+    <section class="card"><h2>Flowchart Final</h2>
+      <a href="assets/flowchart/flowchart-terintegrasi.png"><img src="assets/flowchart/flowchart-terintegrasi.png" alt="Flowchart program terintegrasi"></a>
+      <p>Klik gambar untuk melihat ukuran penuh. Kotak putus-putus menandai bagian Modul A, Modul B, dan inisialisasi.</p>
+    </section>
+
+    <section class="card"><h2>Source Code Final</h2><pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() {
+    // ===== Variabel Modul A: proses tiap barang =====
+    string kodeBarang, namaBarang, statusBarang;
+    int stokAwal = 0, barangMasuk = 0, barangTerjual = 0;
+    int stokMinimum = 0, hargaBeli = 0, stokTersedia = 0;
+    int stokAkhir = 0, jumlahPesan = 0, biayaPesan = 0;
+    char lanjut = 'y';
+
+    // ===== Variabel Modul B: rekapitulasi (di luar perulangan, diisi 0) =====
+    int jumlahAman = 0;
+    int jumlahMenipis = 0;
+    int jumlahHabis = 0;
+
+    int totalTerjual = 0;
+    int totalPesan = 0;
+    long long totalBiayaPemesanan = 0;
+
+    int penjualanTertinggi = -1;
+    string barangTerlaris;
+
+    cout &lt;&lt; "=== EVALUASI PERSEDIAAN BARANG (PROGRAM TERINTEGRASI) ===" &lt;&lt; endl;
+
+    // Perulangan utama: proses barang selama petugas memilih lanjut
+    while (lanjut == 'y' || lanjut == 'Y') {
+        // ---------- MODUL A: input dan validasi ----------
+        cout &lt;&lt; "\n--- Data Barang ---" &lt;&lt; endl;
+        cout &lt;&lt; "Kode barang : ";
+        getline(cin &gt;&gt; ws, kodeBarang);
+        cout &lt;&lt; "Nama barang : ";
+        getline(cin &gt;&gt; ws, namaBarang);
+
+        // Validasi stok awal (tidak boleh negatif atau bukan angka)
+        do {
+            cout &lt;&lt; "Stok awal   : ";
+            if (!(cin &gt;&gt; stokAwal)) {
+                cin.clear();
+                cin.ignore(10000, '\n');
+                stokAwal = -1;
+            }
+            if (stokAwal &lt; 0)
+                cout &lt;&lt; "  [!] Harus berupa angka dan tidak boleh negatif." &lt;&lt; endl;
+        } while (stokAwal &lt; 0);
+
+        // Validasi barang masuk
+        do {
+            cout &lt;&lt; "Barang masuk: ";
+            if (!(cin &gt;&gt; barangMasuk)) {
+                cin.clear();
+                cin.ignore(10000, '\n');
+                barangMasuk = -1;
+            }
+            if (barangMasuk &lt; 0)
+                cout &lt;&lt; "  [!] Harus berupa angka dan tidak boleh negatif." &lt;&lt; endl;
+        } while (barangMasuk &lt; 0);
+
+        // Stok yang tersedia untuk dijual
+        stokTersedia = stokAwal + barangMasuk;
+
+        // Validasi barang terjual (tidak boleh melebihi stok tersedia)
+        do {
+            cout &lt;&lt; "Barang terjual (maks " &lt;&lt; stokTersedia &lt;&lt; "): ";
+            if (!(cin &gt;&gt; barangTerjual)) {
+                cin.clear();
+                cin.ignore(10000, '\n');
+                barangTerjual = -1;
+            }
+            if (barangTerjual &lt; 0 || barangTerjual &gt; stokTersedia)
+                cout &lt;&lt; "  [!] Penjualan tidak valid (0 sampai " &lt;&lt; stokTersedia &lt;&lt; ")." &lt;&lt; endl;
+        } while (barangTerjual &lt; 0 || barangTerjual &gt; stokTersedia);
+
+        // Validasi stok minimum
+        do {
+            cout &lt;&lt; "Stok minimum: ";
+            if (!(cin &gt;&gt; stokMinimum)) {
+                cin.clear();
+                cin.ignore(10000, '\n');
+                stokMinimum = -1;
+            }
+            if (stokMinimum &lt; 0)
+                cout &lt;&lt; "  [!] Harus berupa angka dan tidak boleh negatif." &lt;&lt; endl;
+        } while (stokMinimum &lt; 0);
+
+        // Validasi harga beli
+        do {
+            cout &lt;&lt; "Harga beli  : Rp";
+            if (!(cin &gt;&gt; hargaBeli)) {
+                cin.clear();
+                cin.ignore(10000, '\n');
+                hargaBeli = -1;
+            }
+            if (hargaBeli &lt; 0)
+                cout &lt;&lt; "  [!] Harus berupa angka dan tidak boleh negatif." &lt;&lt; endl;
+        } while (hargaBeli &lt; 0);
+
+        // ---------- MODUL A: perhitungan ----------
+        // Hitung stok akhir
+        stokAkhir = stokTersedia - barangTerjual;
+
+        // Tentukan status barang
+        if (stokAkhir == 0) {
+            statusBarang = "Habis";
+        } else if (stokAkhir &lt; stokMinimum) {
+            statusBarang = "Menipis";
+        } else {
+            statusBarang = "Aman";
+        }
+
+        // Hitung jumlah pesan: sampai stok mencapai dua kali stok minimum
+        if (statusBarang == "Habis" || statusBarang == "Menipis") {
+            jumlahPesan = (2 * stokMinimum) - stokAkhir;
+        } else {
+            jumlahPesan = 0;
+        }
+
+        // Hitung biaya pemesanan
+        biayaPesan = jumlahPesan * hargaBeli;
+
+        // ---------- MODUL B: perbarui rekapitulasi ----------
+        // Rekap status
+        if (statusBarang == "Aman")
+            jumlahAman++;
+        else if (statusBarang == "Menipis")
+            jumlahMenipis++;
+        else
+            jumlahHabis++;
+
+        // Rekap total
+        totalTerjual += barangTerjual;
+        totalPesan += jumlahPesan;
+        totalBiayaPemesanan += biayaPesan;
+
+        // Cari barang dengan penjualan tertinggi
+        if (barangTerjual &gt; penjualanTertinggi) {
+            penjualanTertinggi = barangTerjual;
+            barangTerlaris = namaBarang;
+        }
+
+        // ---------- MODUL A: tampilkan rincian ----------
+        cout &lt;&lt; "\n--- Rincian Barang ---" &lt;&lt; endl;
+        cout &lt;&lt; "Kode / Nama     : " &lt;&lt; kodeBarang &lt;&lt; " / " &lt;&lt; namaBarang &lt;&lt; endl;
+        cout &lt;&lt; "Stok awal       : " &lt;&lt; stokAwal &lt;&lt; endl;
+        cout &lt;&lt; "Barang masuk    : " &lt;&lt; barangMasuk &lt;&lt; endl;
+        cout &lt;&lt; "Barang terjual  : " &lt;&lt; barangTerjual &lt;&lt; endl;
+        cout &lt;&lt; "Stok akhir      : " &lt;&lt; stokAkhir &lt;&lt; endl;
+        cout &lt;&lt; "Stok minimum    : " &lt;&lt; stokMinimum &lt;&lt; endl;
+        cout &lt;&lt; "Status          : " &lt;&lt; statusBarang &lt;&lt; endl;
+        cout &lt;&lt; "Jumlah dipesan  : " &lt;&lt; jumlahPesan &lt;&lt; " unit" &lt;&lt; endl;
+        cout &lt;&lt; "Biaya pemesanan : Rp" &lt;&lt; biayaPesan &lt;&lt; endl;
+
+        // Pilihan mengulang atau mengakhiri (hanya menerima y atau n)
+        do {
+            cout &lt;&lt; "\nProses barang lain? (y/n): ";
+            cin &gt;&gt; lanjut;
+
+            if (lanjut != 'y' &amp;&amp; lanjut != 'Y' &amp;&amp;
+                lanjut != 'n' &amp;&amp; lanjut != 'N') {
+                cout &lt;&lt; "[!] Pilihan hanya y atau n." &lt;&lt; endl;
+            }
+        } while (lanjut != 'y' &amp;&amp; lanjut != 'Y' &amp;&amp;
+                 lanjut != 'n' &amp;&amp; lanjut != 'N');
+    }
+
+    // ---------- MODUL B: tampilkan rekapitulasi ----------
+    cout &lt;&lt; "\n===== HASIL REKAPITULASI =====" &lt;&lt; endl;
+    cout &lt;&lt; "Jumlah barang aman     : " &lt;&lt; jumlahAman &lt;&lt; endl;
+    cout &lt;&lt; "Jumlah barang menipis  : " &lt;&lt; jumlahMenipis &lt;&lt; endl;
+    cout &lt;&lt; "Jumlah barang habis    : " &lt;&lt; jumlahHabis &lt;&lt; endl;
+    cout &lt;&lt; "Total unit terjual     : " &lt;&lt; totalTerjual &lt;&lt; endl;
+    cout &lt;&lt; "Total unit dipesan     : " &lt;&lt; totalPesan &lt;&lt; endl;
+    cout &lt;&lt; "Total biaya pemesanan  : Rp" &lt;&lt; totalBiayaPemesanan &lt;&lt; endl;
+    cout &lt;&lt; "Barang terlaris        : " &lt;&lt; barangTerlaris &lt;&lt; endl;
+    cout &lt;&lt; "Penjualan tertinggi    : " &lt;&lt; penjualanTertinggi &lt;&lt; " unit" &lt;&lt; endl;
+
+    cout &lt;&lt; "\nProgram selesai." &lt;&lt; endl;
+    return 0;
+}</code></pre></section>
+
+    <section class="card"><h2>Hasil Eksekusi</h2>
+      <h3>Tiga barang dan rekapitulasi</h3>
+      <a href="assets/screenshot/hasil-terintegrasi.png"><img src="assets/screenshot/hasil-terintegrasi.png" alt="Hasil eksekusi program terintegrasi dengan tiga barang dan rekapitulasi"></a>
+      <h3>Validasi input</h3>
+      <a href="assets/screenshot/hasil-terintegrasi-validasi.png"><img src="assets/screenshot/hasil-terintegrasi-validasi.png" alt="Hasil eksekusi validasi input pada program terintegrasi"></a>
+    </section>
+
     <section class="card">
       <h2>Tabel Pengujian</h2>
-      <div class="table-wrap"><table><thead><tr><th>No</th><th>Skenario</th><th>Data masukan</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Status</th></tr></thead><tbody><tr><td><!-- ISI SENDIRI --></td><td><!-- ISI SENDIRI --></td><td><!-- ISI SENDIRI --></td><td><!-- ISI SENDIRI --></td><td><!-- ISI SENDIRI --></td><td><!-- ISI SENDIRI --></td></tr></tbody></table></div>
+      <div class="table-wrap"><table><thead><tr><th>No</th><th>Skenario</th><th>Data masukan</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Status</th></tr></thead><tbody>
+          <tr><td>1</td><td>Satu barang berstatus Menipis</td><td>Pulpen: awal 10, masuk 5, terjual 12, min 5, harga 2000; lanjut n</td><td>Aman 0, Menipis 1, Habis 0; terjual 12; dipesan 7; biaya Rp14000; terlaris Pulpen (12 unit)</td><td>Aman 0, Menipis 1, Habis 0; terjual 12; dipesan 7; biaya Rp14000; terlaris Pulpen (12 unit)</td><td>Berhasil</td></tr>
+          <tr><td>2</td><td>Tiga barang: Menipis, Aman, Habis</td><td>Pulpen (10,5,12,5,2000); Buku (20,10,5,5,1500); Penghapus (10,0,10,5,2000)</td><td>Aman 1, Menipis 1, Habis 1; terjual 27; dipesan 17; biaya Rp34000; terlaris Pulpen (12 unit)</td><td>Aman 1, Menipis 1, Habis 1; terjual 27; dipesan 17; biaya Rp34000; terlaris Pulpen (12 unit)</td><td>Berhasil</td></tr>
+          <tr><td>3</td><td>Semua barang Aman</td><td>Pensil (20,0,5,5,1000); Spidol (30,0,10,10,2000)</td><td>Aman 2; terjual 15; dipesan 0; biaya Rp0; terlaris Spidol (10 unit)</td><td>Aman 2; terjual 15; dipesan 0; biaya Rp0; terlaris Spidol (10 unit)</td><td>Berhasil</td></tr>
+          <tr><td>4</td><td>Batas: stok akhir = stok minimum</td><td>Awal 10, masuk 0, terjual 5, min 5, harga 2000</td><td>Aman 1; dipesan 0; biaya Rp0</td><td>Aman 1; dipesan 0; biaya Rp0</td><td>Berhasil</td></tr>
+          <tr><td>5</td><td>Nilai nol</td><td>Awal 0, masuk 0, terjual 0, min 5, harga 3000</td><td>Habis 1; terjual 0; dipesan 10; biaya Rp30000</td><td>Habis 1; terjual 0; dipesan 10; biaya Rp30000; penjualan tertinggi 0 unit</td><td>Berhasil</td></tr>
+          <tr><td>6</td><td>Penjualan sama besar</td><td>Pertama (10,0,5,5,1000); Kedua (10,0,5,5,1000)</td><td>Aman 2; terjual 10; terlaris barang yang diinput lebih dulu (Pertama)</td><td>Aman 2; terjual 10; terlaris Pertama (5 unit)</td><td>Berhasil</td></tr>
+          <tr><td>7</td><td>Penjualan melebihi stok</td><td>Awal 10, masuk 5, terjual 16, lalu 15</td><td>16 ditolak dan diminta input ulang</td><td>Muncul pesan penjualan tidak valid (0 sampai 15); 15 diterima, status Habis, dipesan 10</td><td>Berhasil</td></tr>
+          <tr><td>8</td><td>Input negatif</td><td>Stok awal -5, lalu 10</td><td>-5 ditolak dan diminta input ulang</td><td>Muncul pesan harus berupa angka dan tidak boleh negatif; 10 diterima</td><td>Berhasil</td></tr>
+          <tr><td>9</td><td>Input bukan angka</td><td>Stok awal abc, lalu 10</td><td>abc ditolak, program tidak berhenti</td><td>Muncul pesan harus berupa angka dan tidak boleh negatif; program tetap berjalan sampai selesai</td><td>Berhasil</td></tr>
+          <tr><td>10</td><td>Pilihan lanjut tidak valid</td><td>Jawaban q, lalu n</td><td>q ditolak, rekapitulasi tampil setelah n</td><td>Muncul pesan pilihan hanya y atau n; setelah n rekapitulasi tampil</td><td>Berhasil</td></tr>
+      </tbody></table></div>
     </section>
-    <section class="card"><h2>Trace Table Percabangan dan Perulangan</h2><p><!-- ISI SENDIRI --></p></section>
-    <section class="card"><h2>Daftar Kesalahan dan Perbaikan</h2><p><!-- ISI SENDIRI --></p></section>
+
+    <section class="card"><h2>Trace Table Percabangan dan Perulangan</h2>
+      <h3>1. Trace table percabangan: status dan jumlah pesan</h3>
+      <p>Pengecekan dilakukan dari atas ke bawah dan berhenti di syarat pertama yang benar.</p>
+      <div class="table-wrap"><table><thead><tr><th>No</th><th>stokAkhir</th><th>stokMinimum</th><th>stokAkhir = 0?</th><th>stokAkhir &lt; stokMinimum?</th><th>statusBarang</th><th>jumlahPesan</th></tr></thead><tbody>
+        <tr><td>1</td><td>3</td><td>5</td><td>Tidak</td><td>Ya</td><td>Menipis</td><td>(2 x 5) - 3 = 7</td></tr>
+        <tr><td>2</td><td>25</td><td>5</td><td>Tidak</td><td>Tidak</td><td>Aman</td><td>0</td></tr>
+        <tr><td>3</td><td>0</td><td>5</td><td>Ya</td><td>(tidak dicek)</td><td>Habis</td><td>(2 x 5) - 0 = 10</td></tr>
+        <tr><td>4</td><td>5</td><td>5</td><td>Tidak</td><td>Tidak</td><td>Aman</td><td>0</td></tr>
+        <tr><td>5</td><td>0</td><td>0</td><td>Ya</td><td>(tidak dicek)</td><td>Habis</td><td>(2 x 0) - 0 = 0</td></tr>
+      </tbody></table></div>
+
+      <h3>2. Trace table perulangan utama (tiga barang)</h3>
+      <p>Data: Pulpen (10, 5, 12, 5, 2000), Buku (20, 10, 5, 5, 1500), Penghapus (10, 0, 10, 5, 2000).</p>
+      <div class="table-wrap"><table><thead><tr><th>Iterasi</th><th>namaBarang</th><th>barangTerjual</th><th>statusBarang</th><th>jumlahPesan</th><th>biayaPesan</th><th>jumlahAman</th><th>jumlahMenipis</th><th>jumlahHabis</th><th>totalTerjual</th><th>totalPesan</th><th>totalBiayaPemesanan</th><th>penjualanTertinggi</th><th>barangTerlaris</th><th>lanjut</th></tr></thead><tbody>
+        <tr><td>Awal</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>-1</td><td>""</td><td>y</td></tr>
+        <tr><td>1</td><td>Pulpen</td><td>12</td><td>Menipis</td><td>7</td><td>14000</td><td>0</td><td>1</td><td>0</td><td>12</td><td>7</td><td>14000</td><td>12 (12 &gt; -1)</td><td>Pulpen</td><td>y</td></tr>
+        <tr><td>2</td><td>Buku</td><td>5</td><td>Aman</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>17</td><td>7</td><td>14000</td><td>12 (5 &gt; 12? Tidak)</td><td>Pulpen</td><td>y</td></tr>
+        <tr><td>3</td><td>Penghapus</td><td>10</td><td>Habis</td><td>10</td><td>20000</td><td>1</td><td>1</td><td>1</td><td>27</td><td>17</td><td>34000</td><td>12 (10 &gt; 12? Tidak)</td><td>Pulpen</td><td>n</td></tr>
+        <tr><td>Selesai</td><td colspan="14">lanjut = n, perulangan berhenti dan rekapitulasi ditampilkan.</td></tr>
+      </tbody></table></div>
+
+      <h3>3. Trace table perulangan validasi barang terjual (stokTersedia = 15)</h3>
+      <div class="table-wrap"><table><thead><tr><th>Percobaan</th><th>Input</th><th>barangTerjual</th><th>barangTerjual &lt; 0 atau &gt; 15?</th><th>Tindakan</th></tr></thead><tbody>
+        <tr><td>1</td><td>99</td><td>99</td><td>Ya</td><td>Tampil pesan penjualan tidak valid, ulangi</td></tr>
+        <tr><td>2</td><td>abc</td><td>-1 (input gagal dibaca)</td><td>Ya</td><td>Tampil pesan penjualan tidak valid, ulangi</td></tr>
+        <tr><td>3</td><td>15</td><td>15</td><td>Tidak</td><td>Perulangan berhenti, data diterima</td></tr>
+      </tbody></table></div>
+    </section>
+
+    <section class="card"><h2>Daftar Kesalahan dan Perbaikan</h2>
+      <div class="table-wrap"><table><thead><tr><th>No</th><th>Kesalahan</th><th>Penyebab</th><th>Perbaikan</th></tr></thead><tbody>
+        <tr><td>1</td><td>File <code>modul_a.cpp</code> berwarna merah dan kodenya terpotong</td><td>Proses menempel terganggu oleh mode timpa (OVR) di VS Code dan saran otomatis Copilot</td><td>Mode OVR dimatikan, isi file diganti dengan versi lengkap, lalu dikompilasi ulang</td></tr>
+        <tr><td>2</td><td>Git menampilkan "nothing to commit, working tree clean" padahal file sudah diisi</td><td>File belum disimpan (titik putih di tab VS Code)</td><td>File disimpan dengan Ctrl + S, lalu add dan commit diulang</td></tr>
+        <tr><td>3</td><td>Error "undefined reference to WinMain" saat kompilasi</td><td>File yang dikompilasi belum berisi fungsi <code>main()</code> karena belum tersimpan</td><td>File disimpan lalu dikompilasi ulang</td></tr>
+        <tr><td>4</td><td>Judul dan kartu ganda pada halaman Modul A</td><td>Isi ditempel di tengah baris placeholder, bukan menggantikan seluruh baris</td><td>Dirapikan dengan Find and Replace sehingga tiap bagian hanya muncul sekali</td></tr>
+        <tr><td>5</td><td><code>git add</code> gagal: "pathspec did not match any files"</td><td>Terminal berada di folder <code>src</code>, bukan folder utama repository</td><td>Pindah ke folder utama dengan <code>cd ..</code></td></tr>
+        <tr><td>6</td><td>Gambar flowchart tidak tampil di halaman</td><td>Nama file gambar berbeda dengan nama pada tag <code>img</code></td><td>File diganti namanya agar sama dengan yang dipakai di HTML</td></tr>
+        <tr><td>7</td><td>Flowchart Modul A: arah panah ke Selesai terbalik, label Ya/Tidak dan kepala panah belum lengkap</td><td>Kesalahan penggambaran</td><td>Flowchart dikoreksi dan digambar ulang, lalu dicocokkan dengan pseudocode</td></tr>
+        <tr><td>8</td><td>Modul B meminta input manual status, jumlah pesan, dan biaya pemesanan</td><td>Modul B ditulis berdiri sendiri, belum memakai hasil Modul A</td><td>Input manual dihapus, Modul B memakai hasil perhitungan Modul A, dan variabel rekapitulasi diletakkan di luar perulangan</td></tr>
+        <tr><td>9</td><td>Keterbatasan: jawaban "yes" pada pertanyaan lanjut menjadikan huruf "es" terbaca sebagai kode barang berikutnya</td><td>Program hanya membaca satu karakter untuk pilihan lanjut</td><td>Belum diperbaiki dan dicatat sebagai keterbatasan. Perbaikan: membaca jawaban sebagai string dan memakai huruf pertamanya</td></tr>
+      </tbody></table></div>
+    </section>
   </main>
   <footer class="site-footer"><div class="container">Kelompok 6 <span aria-hidden="true">·</span> Sistem Informasi</div></footer>
 </body>
